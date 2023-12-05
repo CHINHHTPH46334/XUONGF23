@@ -11,7 +11,6 @@ package ChucNangBanHang;
 public class HoaDonChiTiet {
 
     private String maHD;
-    private String tenKH;
     private String ngayTao;
     private String maSP;
     private String tenSP;
@@ -20,14 +19,12 @@ public class HoaDonChiTiet {
     private Double thanhTien;
     private String maGH;
     private String maNV;
-    private String maKH;
 
     public HoaDonChiTiet() {
     }
 
-    public HoaDonChiTiet(String maHD, String tenKH, String ngayTao, String maSP, String tenSP, Integer soLuong, Double donGia, Double thanhTien, String maGH, String maNV, String maKH) {
+    public HoaDonChiTiet(String maHD, String ngayTao, String maSP, String tenSP, Integer soLuong, Double donGia, Double thanhTien, String maGH, String maNV) {
         this.maHD = maHD;
-        this.tenKH = tenKH;
         this.ngayTao = ngayTao;
         this.maSP = maSP;
         this.tenSP = tenSP;
@@ -36,7 +33,6 @@ public class HoaDonChiTiet {
         this.thanhTien = thanhTien;
         this.maGH = maGH;
         this.maNV = maNV;
-        this.maKH = maKH;
     }
 
     public String getMaHD() {
@@ -45,14 +41,6 @@ public class HoaDonChiTiet {
 
     public void setMaHD(String maHD) {
         this.maHD = maHD;
-    }
-
-    public String getTenKH() {
-        return tenKH;
-    }
-
-    public void setTenKH(String tenKH) {
-        this.tenKH = tenKH;
     }
 
     public String getNgayTao() {
@@ -119,13 +107,9 @@ public class HoaDonChiTiet {
         this.maNV = maNV;
     }
 
-    public String getMaKH() {
-        return maKH;
-    }
+    
 
-    public void setMaKH(String maKH) {
-        this.maKH = maKH;
-    }
+    
 
     
     

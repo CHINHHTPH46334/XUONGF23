@@ -101,11 +101,11 @@ public class QuanLyBanHang {
             try {
                 while (rs.next()) {
                     GioHang gh = new GioHang();
-                    gh.setMaSP(rs.getString(1));
-                    gh.setTenSp(rs.getString(2));
-                    gh.setSoLuong(rs.getInt(3));
-                    gh.setDonGia(rs.getDouble(4));
-                    gh.setThanhTien(rs.getDouble(5));
+                    gh.setMaSP(rs.getString(2));
+                    gh.setTenSp(rs.getString(3));
+                    gh.setSoLuong(rs.getInt(4));
+                    gh.setDonGia(rs.getDouble(5));
+                    gh.setThanhTien(rs.getDouble(6));
 
                     listGioHang.add(gh);
                 }
@@ -348,11 +348,10 @@ public class QuanLyBanHang {
     public ArrayList<HoaDonChiTiet> getListHDCT(String maHD){
         listHDCT.clear();
         try {
-            String sql = "select HoaDonChiTiet.ma_hoa_don, KhachHang.ho_ten, GioHang.ma_san_pham, GioHang.ten_san_pham, GioHang.so_luong,GioHang.don_gia, GioHang.thanh_tien, HoaDon.ngay_tao\n" +
+            String sql = "select HoaDonChiTiet.ma_hoa_don, GioHang.ma_san_pham, GioHang.ten_san_pham, GioHang.so_luong,GioHang.don_gia, GioHang.thanh_tien, HoaDon.ngay_tao\n" +
                         "from HoaDonChiTiet\n" +
-                        "join KhachHang on KhachHang.ma_khach_hang = HoaDonChiTiet.ma_khach_hang\n" +
                         "join HoaDon on HoaDon.ma_hoa_don = HoaDonChiTiet.ma_hoa_don\n" +
-                        "join GioHang on GioHang.id = HoaDonChiTiet.id\n" +
+                        "join GioHang on GioHang.id= HoaDonChiTiet.id_gio_hang \n" +
                         "where HoaDonChiTiet.ma_hoa_don = ?";
             Connection conn = DBConnect.getConnection();
             PreparedStatement ptm = conn.prepareStatement(sql);
@@ -361,7 +360,6 @@ public class QuanLyBanHang {
             while (rs.next()) {
                 HoaDonChiTiet hdct = new HoaDonChiTiet();
                 hdct.setMaHD(rs.getString(1));
-                hdct.setTenKH(rs.getString(2));
                 hdct.setMaSP(rs.getString(3));
                 hdct.setTenSP(rs.getString(4));
                 hdct.setSoLuong(rs.getInt(5));
@@ -376,13 +374,13 @@ public class QuanLyBanHang {
         return listHDCT;
     }
     public void addHDCT(HoaDonChiTiet hdct) {
-        String sql = "insert into HoaDonChiTiet(ma_hoa_don,ma_khach_hang,ma_nhan_vien) values (?,?,?)";
+        String sql = "insert into HoaDonChiTiet(ma_hoa_don,ma_nhan_vien,id_gio_hang) values (?,?,?)";
         try {
             Connection conn = DBConnect.getConnection();
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, hdct.getMaHD());
-            stm.setString(2, "KH001");
-            stm.setString(3, "NV001");
+            stm.setString(2, "NV001");
+            stm.setString(3, hdct.getMaGH());
             stm.executeUpdate();
             conn.close();
         } catch (Exception e) {

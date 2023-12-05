@@ -109,7 +109,6 @@ public class ChucNangBanHangView extends javax.swing.JFrame {
             dftm.addRow(new Object[]{
                 stt++,
                 hdct.getMaHD(),
-                hdct.getTenKH(),
                 hdct.getMaSP(),
                 hdct.getTenSP(),
                 hdct.getSoLuong(),
@@ -241,10 +240,10 @@ public class ChucNangBanHangView extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblHoaDonDTT = new javax.swing.JTable();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        tblHDCT = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
         txtTimHD = new javax.swing.JTextField();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tblHDCT = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -306,16 +305,6 @@ public class ChucNangBanHangView extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(tblHoaDonDTT);
 
-        tblHDCT.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "STT", "Mã hoá đơn", "Tên khách hàng", "Mã sản phẩm", "Tên sản phẩm", "Số lượng", "Đơn giá", "Thành tiền", "Ngày tạo"
-            }
-        ));
-        jScrollPane5.setViewportView(tblHDCT);
-
         jLabel10.setText("Tìm theo mã hoá đơn");
 
         txtTimHD.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -324,25 +313,44 @@ public class ChucNangBanHangView extends javax.swing.JFrame {
             }
         });
 
+        tblHDCT.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "STT", "Mã Sản Phẩm", "Tên Sản Phẩm", "Năm Bán", "Trọng Lượng", "Mô Tả", "SL SP", "Giá Nhập", "Giá Bán"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane6.setViewportView(tblHDCT);
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap(68, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(217, 217, 217))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 1070, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 69, 69))))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(115, 115, 115)
                 .addComponent(jLabel10)
                 .addGap(18, 18, 18)
                 .addComponent(txtTimHD, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(54, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(217, 217, 217))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1153, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,9 +361,9 @@ public class ChucNangBanHangView extends javax.swing.JFrame {
                     .addComponent(txtTimHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(226, 226, 226))
+                .addGap(37, 37, 37)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(225, Short.MAX_VALUE))
         );
 
         tabQL.addTab("Quản lý hoá đơn", jPanel5);
@@ -986,15 +994,16 @@ public class ChucNangBanHangView extends javax.swing.JFrame {
     private void tblHoaDonDTTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonDTTMouseClicked
         // TODO add your handling code here:
         int rowDTT = tblHoaDonDTT.getSelectedRow();
-        
+        dftm = (DefaultTableModel) tblHoaDonDTT.getModel();
         if (rowDTT >= 0) {
             String maHD1 = (String) tblHoaDonDTT.getValueAt(rowDTT, 1);
-            String maGH = "";
             HoaDonChiTiet hdct = new HoaDonChiTiet();
+            int i = 0;
+            
             for (GioHang gioHang : quanLyBanHang.getListGH(maHD1)) {
-                maGH = gioHang.getMaGH();
                 hdct.setMaHD(maHD1);
-                hdct.setMaGH(maGH);
+                i++;
+                hdct.setMaGH(i + "");
                 quanLyBanHang.addHDCT(hdct);
             }
             
@@ -1077,7 +1086,7 @@ public class ChucNangBanHangView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JRadioButton rdChoThanhToan;
     private javax.swing.JRadioButton rdDaHuy;
     private javax.swing.JRadioButton rdDaThanhToan;
