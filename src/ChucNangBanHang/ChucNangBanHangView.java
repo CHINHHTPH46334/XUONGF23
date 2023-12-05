@@ -315,17 +315,14 @@ public class ChucNangBanHangView extends javax.swing.JFrame {
 
         tblHDCT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "STT", "Mã Sản Phẩm", "Tên Sản Phẩm", "Năm Bán", "Trọng Lượng", "Mô Tả", "SL SP", "Giá Nhập", "Giá Bán"
+                "STT", "Mã hoá đơn", "Mã sản phẩm", "Tên sản phẩm", "Số lượng", "Đơn giá", "Thành tiền", "Ngày tạo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -909,8 +906,6 @@ public class ChucNangBanHangView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Thanh toán thành công");
             loadDataHD(quanLyBanHang.getListHoaDon());
             loadDataHDDTT(listTrangThai("Đã thanh toán"));
-            
-
 
         } else {
             JOptionPane.showMessageDialog(this, "Chưa chọn dòng");
@@ -999,27 +994,31 @@ public class ChucNangBanHangView extends javax.swing.JFrame {
             String maHD1 = (String) tblHoaDonDTT.getValueAt(rowDTT, 1);
             HoaDonChiTiet hdct = new HoaDonChiTiet();
             int i = 0;
-            
+            quanLyBanHang.deleteHDCT();
             for (GioHang gioHang : quanLyBanHang.getListGH(maHD1)) {
                 hdct.setMaHD(maHD1);
                 i++;
                 hdct.setMaGH(i + "");
                 quanLyBanHang.addHDCT(hdct);
             }
-            
+
             loadDataHDCT(quanLyBanHang.getListHDCT(maHD1));
         }
     }//GEN-LAST:event_tblHoaDonDTTMouseClicked
 
     private void txtTimHDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimHDKeyReleased
         // TODO add your handling code here:
-        String maHDDTT =  txtTimHD.getText();
+        String maHDDTT = txtTimHD.getText();
         List<HoaDon> listHD = new ArrayList<>();
         String ma = "";
-        for(HoaDon hd : listTrangThai("Đã thanh toán")){
-            if (maHDDTT.equals(hd.getMaHoaDon())) {
-                ma = maHDDTT;
-                listHD.add(hd);
+        if (ma.equals("")) {
+            loadDataHDDTT(listTrangThai("Đã thanh toán"));
+        } else {
+            for (HoaDon hd : listTrangThai("Đã thanh toán")) {
+                if (maHDDTT.equals(hd.getMaHoaDon())) {
+                    ma = maHDDTT;
+                    listHD.add(hd);
+                }
             }
         }
         loadDataHDDTT((ArrayList<HoaDon>) listHD);

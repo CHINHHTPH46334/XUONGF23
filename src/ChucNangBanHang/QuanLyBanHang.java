@@ -360,12 +360,12 @@ public class QuanLyBanHang {
             while (rs.next()) {
                 HoaDonChiTiet hdct = new HoaDonChiTiet();
                 hdct.setMaHD(rs.getString(1));
-                hdct.setMaSP(rs.getString(3));
-                hdct.setTenSP(rs.getString(4));
-                hdct.setSoLuong(rs.getInt(5));
-                hdct.setDonGia(rs.getDouble(6));
-                hdct.setThanhTien(rs.getDouble(7));
-                hdct.setNgayTao(rs.getString(8));
+                hdct.setMaSP(rs.getString(2));
+                hdct.setTenSP(rs.getString(3));
+                hdct.setSoLuong(rs.getInt(4));
+                hdct.setDonGia(rs.getDouble(5));
+                hdct.setThanhTien(rs.getDouble(6));
+                hdct.setNgayTao(rs.getString(7));
                 listHDCT.add(hdct);
             }
         } catch (Exception e) {
@@ -381,6 +381,17 @@ public class QuanLyBanHang {
             stm.setString(1, hdct.getMaHD());
             stm.setString(2, "NV001");
             stm.setString(3, hdct.getMaGH());
+            stm.executeUpdate();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void deleteHDCT(){
+        String sql = "delete from HoaDonChiTiet";
+        try {
+            Connection conn = DBConnect.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
             stm.executeUpdate();
             conn.close();
         } catch (Exception e) {
